@@ -25,7 +25,8 @@ public class Task{
       return false;
     } else {
       Task newTask = (Task) otherTask;
-      return this.getDescription().equals(newTask.getDescription());
+      return this.getDescription().equals(newTask.getDescription()) &&
+              this.getId() == newTask.getId();
     }
   }
 
@@ -39,9 +40,10 @@ public class Task{
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO Tasks (description) VALUES (:description)";
-      con.createQuery(sql)
+      this.id = (int) con.createQuery(sql, true)
         .addParameter("description", this.description)
-        .executeUpdate();
+        .executeUpdate()
+        .getKey();
     }
   }
 
