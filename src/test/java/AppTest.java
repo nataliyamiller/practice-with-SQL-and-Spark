@@ -33,13 +33,13 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Todo list!");
   }
 
-  @Test
-  public void categoryIsCreatedTest() {
-    goTo("http://localhost:4567/");
-    fill("#name").with("Household chores");
-    submit(".btn");
-    assertThat(pageSource()).contains("Household chores");
-  }
+  // @Test
+  // public void categoryIsCreatedTest() {
+  //   goTo("http://localhost:4567/");
+  //   fill("#name").with("Household chores");
+  //   submit(".btn");
+  //   assertThat(pageSource()).contains("Household chores");
+  // }
 
   @Test
   public void categoryIsDisplayedTest() {
