@@ -1,9 +1,9 @@
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 // import java.util.ArrayList;
 import java.util.List;
 import org.sql2o.*;
 
-public class Task{
+public class Task {
   private int id;
   private int categoryId;
   private String description;
@@ -46,7 +46,7 @@ public class Task{
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO Tasks (description, categoryId) VALUES (:description, :categoryId)";
+      String sql = "INSERT INTO tasks (description, categoryId) VALUES (:description, :categoryId)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("description", this.description)
         .addParameter("categoryId", this.categoryId)
@@ -62,8 +62,6 @@ public class Task{
           .addParameter("id", id)
           .executeAndFetchFirst(Task.class);
           return task;
-
-
     }
   }
 
@@ -80,34 +78,15 @@ public class Task{
   //   instances.add(this);
   //   mId = instances.size();
   // }
-  //
-  // public String getDescription() {
-  //   return mDescription;
-  // }
-  //
+
   // public boolean isCompleted() {
   //   return mCompleted;
   // }
-  //
-  // public int getId() {
-  //   return mId;
-  // }
-  //
+
   // public void completeTask() {
   //   mCompleted = true;
   // }
-  //
-  // public static ArrayList<Task> all() {
-  //   return instances;
-  // }
-  //
-  // public static Task find(int id) {
-  //   try {
-  //     return instances.get(id-1);
-  //   } catch (IndexOutOfBoundsException e) {
-  //     return null;
-  //   }
-  // }
+
   //
   // public static void clear() {
   //   instances.clear();

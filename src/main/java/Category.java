@@ -36,7 +36,7 @@ public class Category {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO Categories(name) VALUES (:name)";
+      String sql = "INSERT INTO categories (name) VALUES (:name)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .executeUpdate()
@@ -63,48 +63,24 @@ public class Category {
     }
   }
 
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM categories WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 
+    public void update(String name) {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "UPDATE categories SET name = :name WHERE id = :id";
+        con.createQuery(sql)
+          .addParameter("name", name)
+          .addParameter("id", id)
+          .executeUpdate();
+      }
+    }
 
-
-  //
-  //
-  // public Category (String name) {
-  //   mName = name;
-  //   instances.add(this);
-  //   mTasks = new ArrayList<Task>();
-  //   mId = instances.size();
-  // }
-  //
-  // public String getName() {
-  //   return mName;
-  // }
-  //
-  // public static ArrayList<Category> all() {
-  //   return instances;
-  // }
-  //
-  // public int getId() {
-  //   return mId;
-  // }
-  //
-  // public ArrayList<Task> getTasks() {
-  //   return mTasks;
-  // }
-  //
-  // public void addTask(Task taskToAdd) {
-  //   mTasks.add(taskToAdd);
-  // }
-  //
-  // public static void clear() {
-  //   instances.clear();
-  // }
-  //
-  // public static Category find(int id) {
-  //   try {
-  //     return instances.get(id - 1);
-  //   } catch (IndexOutOfBoundsException exception) {
-  //     return null;
-  //   }
-  // }
 
 }

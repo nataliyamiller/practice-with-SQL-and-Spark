@@ -1,4 +1,20 @@
 <h1>Todo list!</h1>
 
-<p><a href="/categories">View Category List</a></p>
-<p><a href="/categories/new">Add a new category</a></p>
+<h1>Add a category</h1>
+
+<p>Add a category here:</p>
+
+<form action="/categories" method="post">
+  <label for="name">Category name</label>
+  <input id="name" name="name" type="text">
+  <button type="submit" class="btn btn-success submit-name">Add Category</button>
+</form>
+
+
+  #if($categories)
+    #foreach($category in $categories)
+    <h3><a href="/categories/$category.getId()">$category.getName()</a></h3>
+    #end
+    #else
+    There are no categories in your list yet!
+    #end
