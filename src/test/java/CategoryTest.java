@@ -1,6 +1,8 @@
+import java.util.Arrays;
+
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.junit.Rule;
+
 
 public class CategoryTest {
 
@@ -34,7 +36,17 @@ public class CategoryTest {
       assertTrue(myCategory.equals(savedCategory));
     }
 
-
+    @Test
+    public void getTasks_retrievesAllTasksFromDatabase_tasksList() {
+      Category myCategory = new Category("Household chores");
+      myCategory.save();
+      Task firstTask = new Task("Mow the lawn", myCategory.getId());
+      firstTask.save();
+      Task secondTask = new Task("Do the dishes", myCategory.getId());
+      secondTask.save();
+      Task[] tasks = new Task[] {firstTask, secondTask};
+      assertTrue(myCategory.getTasks().containsAll(Arrays.asList(tasks)));
+    }
 
   // @Test
   // public void getName_returnsName_true() {
